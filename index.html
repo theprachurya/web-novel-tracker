@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mugen's Novel Tracker</title>
+  <!-- Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <h1>Mugen's <span>Library</span></h1>
+      </div>
+      <nav>
+        <!-- Only shows Add Novel button if logged in -->
+        <button id="addNovelBtn" class="btn primary hidden">Add Novel</button>
+        <button id="loginBtn" class="btn secondary">Login</button>
+        <button id="logoutBtn" class="btn secondary hidden">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search library..." />
+      </div>
+      <div class="filter-wrap">
+        <select id="statusFilter">
+          <option value="All">All Statuses</option>
+          <option value="Reading">Reading</option>
+          <option value="Completed">Completed</option>
+          <option value="Plan to Read">Plan to Read</option>
+          <option value="Dropped">Dropped</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Novel Grid -->
+    <div class="novel-grid" id="novelGrid">
+      <!-- Novels injected dynamically -->
+      <div class="loading-state">Loading library...</div>
+    </div>
+  </main>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content glass">
+      <span class="close-btn" data-modal="loginModal">&times;</span>
+      <h2>Access Terminal</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username">User</label>
+          <input type="text" id="username" required autocomplete="username" />
+        </div>
+        <div class="input-group">
+          <label for="password">Passkey</label>
+          <input type="password" id="password" required autocomplete="current-password" />
+        </div>
+        <div id="loginError" class="error-text hidden">Invalid credentials.</div>
+        <button type="submit" class="btn primary full-width">Authenticate</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add/Edit Novel Modal -->
+  <div id="novelModal" class="modal">
+    <div class="modal-content glass">
+      <span class="close-btn" data-modal="novelModal">&times;</span>
+      <h2 id="novelModalTitle">Add Entry</h2>
+      <form id="novelForm">
+        <input type="hidden" id="editNovelId" />
+        <div class="input-group">
+          <label for="novelTitle">Title</label>
+          <input type="text" id="novelTitle" required />
+        </div>
+        <div class="input-group">
+          <label for="novelAuthor">Author</label>
+          <input type="text" id="novelAuthor" />
+        </div>
+        <div class="input-group">
+          <label for="novelGenre">Genre</label>
+          <input type="text" id="novelGenre" placeholder="e.g. Fantasy, Isekai, Action" />
+        </div>
+        <div class="input-group row">
+          <div class="half">
+            <label for="novelProgress">Progress (Ch)</label>
+            <input type="number" id="novelProgress" min="0" value="0" />
+          </div>
+          <div class="half">
+            <label for="novelTotal">Total (Ch)</label>
+            <input type="number" id="novelTotal" min="0" />
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="novelStatus">Status</label>
+          <select id="novelStatus">
+            <option value="Reading">Reading</option>
+            <option value="Completed">Completed</option>
+            <option value="Plan to Read">Plan to Read</option>
+            <option value="Dropped">Dropped</option>
+          </select>
+        </div>
+        <!-- Custom image override optional -->
+        <div class="input-group">
+          <label for="novelCover">Cover Image URL (Optional)</label>
+          <input type="url" id="novelCover" placeholder="Auto-fetched if blank" />
+        </div>
+        <button type="submit" id="saveNovelBtn" class="btn primary full-width">Save Entry</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
